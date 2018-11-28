@@ -1,6 +1,7 @@
 В папке "First tasks" находятся решения первых 14 задач из данного ресурса:
 http://www.itmathrepetitor.ru/zadachi-po-javascript-iz-knigi-vyrazitelnyjj-javascript/
 
+=========================================================================
 Листинг задач:
 1. Треугольник
 2. FizzBuzz
