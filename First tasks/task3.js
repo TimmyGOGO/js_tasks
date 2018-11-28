@@ -4,13 +4,12 @@ let size = 8;
 
 for (let i = 0; i < size; i++){
     //сдвиг меняется между значениями 0 и 1 каждую строчку
-    let rezult = "";
+    let line = "";
     let shift = i % 2;
     for (let j = 0; j < size; j++){
         let s = j + shift;
         //если четное число - добавляем пробел, нечетное - решетку
-        rezult += ((s % 2 == 0) ? " " : "#");
+        line += ((s % 2 == 0) ? " " : "#");
     }
-    //в конце строки добавляем перевод на новую
-    console.log(rezult);
+    console.log(line);
 }
