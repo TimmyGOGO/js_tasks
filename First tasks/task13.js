@@ -48,25 +48,32 @@ function average(array) {
 }
    
 // Мой код:
+//------------------------------------------------
+//вспомогательная функция:
+function isInSet(itemName, set){
+    if ( set[itemName] != undefined ) return true;
+    else return false;
+}
+
 /*получим ассоциативный массив, где:
  *ключи - века
  *элементы - массивы с возрастами людей
 */
- let centuries = {}; 
+let centuryGroups = {}; 
 ancestry.forEach(function(person){
     function getCentury(p){ return Math.ceil(p.died / 100); }
     function getAge(p){ return p.died - p.born; }
     
     let century = getCentury(person);
 
-    if (centuries[century] == undefined) centuries[century] = [];
+    if ( !isInSet(century, centuryGroups) ) centuryGroups[century] = [];
 
-    centuries[century].push(getAge(person));
+    centuryGroups[century].push(getAge(person));
 });
 
 //теперь для каждого века посчитаем средний возраст:
-Object.keys(centuries).forEach( function(j){
-    console.log( j + ": " + average(centuries[j]).toFixed(1));
+Object.keys(centuryGroups).forEach( function(century){
+    console.log( century + ": " + average(centuryGroups[century]).toFixed(1));
 });
 
 // результат: 
@@ -76,3 +83,93 @@ Object.keys(centuries).forEach( function(j){
 //   19: 54.8
 //   20: 84.7
 //   21: 94
+
+//------------------------------------------------
+//абстрактная функция groupBy: возвращает ассоциативный массив
+//array - массив, который нужно поделить на группы
+//func - функция принадлежности элемента массива группе
+//возвращает название группы для элемента массива
+function groupBy(array, func){
+    let groups = {}; 
+    array.forEach( function(item){
+        let groupName = func(item);
+        if ( !isInSet(groupName, groups) ) groups[groupName] = [];
+        
+        groups[groupName].push(item);
+    });
+    return groups;
+}
+
+//пусть функция принадлежности, такая:
+function byCentury(item){
+    return Math.ceil(item.died / 100);
+}
+
+//тогда:
+console.log("Сгруппировать людей по веку:");
+let groups = groupBy(ancestry, byCentury);
+
+//чтобы можно было проверить вывод:
+Object.keys(groups).forEach( function(century){
+    console.log(century + ":\n-------------");
+    for (let person of groups[century]){
+        console.log(`{name: ${person.name}, born: ${person.born}, died: ${person.died}}`);
+    }
+});
+
+//результат:
+/*
+Сгруппировать людей по веку:
+16:
+-------------
+{name: Pauwels van Haverbeke, born: 1535, died: 1582}
+{name: Lievijne Jans, born: 1542, died: 1582}
+17:
+-------------
+{name: Pieter Haverbeke, born: 1602, died: 1642}
+{name: Lieven van Haverbeke, born: 1570, died: 1636}
+{name: Lieven Haverbeke, born: 1631, died: 1676}
+{name: Elisabeth Hercke, born: 1632, died: 1674}
+{name: Anna van Hecke, born: 1607, died: 1670}
+18:
+-------------
+{name: Maria de Rycke, born: 1683, died: 1724}
+{name: Jan van Brussel, born: 1714, died: 1748}
+{name: Lieven de Causmaecker, born: 1696, died: 1724}
+{name: Livina Haverbeke, born: 1692, died: 1743}
+{name: Pieter Bernard Haverbeke, born: 1695, died: 1762}
+{name: Willem Haverbeke, born: 1668, died: 1731}
+{name: Pieter Antone Haverbeke, born: 1753, died: 1798}
+{name: Angela Haverbeke, born: 1728, died: 1734}
+{name: Elisabeth Haverbeke, born: 1711, died: 1754}
+{name: Bernardus de Causmaecker, born: 1721, died: 1789}
+{name: Jacoba Lammens, born: 1699, died: 1740}
+{name: Pieter de Decker, born: 1705, died: 1780}
+{name: Joanna de Pape, born: 1654, died: 1723}
+{name: Daniel Haverbeke, born: 1652, died: 1723}
+{name: Martina de Pape, born: 1666, died: 1727}
+{name: Jan Francies Haverbeke, born: 1725, died: 1779}
+{name: Petronella de Decker, born: 1731, died: 1781}
+{name: Laurentia Haverbeke, born: 1710, died: 1786}
+{name: Jan Haverbeke, born: 1671, died: 1731}
+19:
+-------------
+{name: Jan Frans van Brussel, born: 1761, died: 1833}
+{name: Joanna de Causmaecker, born: 1762, died: 1807}
+{name: Maria van Brussel, born: 1801, died: 1834}
+{name: Livina Sierens, born: 1761, died: 1826}
+{name: Carel Haverbeke, born: 1796, died: 1837}
+{name: Jacobus Bernardus van Brussel, born: 1736, died: 1809}
+20:
+-------------
+{name: Carolus Haverbeke, born: 1832, died: 1905}
+{name: Emma de Milliano, born: 1876, died: 1956}
+{name: Philibert Haverbeke, born: 1907, died: 1997}
+{name: Emile Haverbeke, born: 1877, died: 1968}
+{name: Maria Haverbeke, born: 1905, died: 1997}
+{name: Maria Sturm, born: 1835, died: 1917}
+21:
+-------------
+{name: Clara Aernoudts, born: 1918, died: 2012}
+*/
+
