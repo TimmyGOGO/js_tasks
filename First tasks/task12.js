@@ -53,6 +53,16 @@ ancestry.forEach(function(person) {
 });
  
 // Мой код:
+//1. уберем людей, чьих матерей нет в списке;
+//2. посчитаем разницу в возрастах
+let arrayWithDiffs = ancestry.filter(function(person){
+  if (byName[person["mother"]] != undefined) return true;
+  else return false;
+}).map(function(person){ 
+  return person["born"] - byName[person["mother"]]["born"];
+});
 
- 
+//результат:
+//toFixed(n) - оставляет n цифр после запятой, остальные - обрезает (с округлением)
+console.log(average(arrayWithDiffs).toFixed(1));
 // → 31.2
