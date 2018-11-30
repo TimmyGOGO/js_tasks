@@ -50,8 +50,8 @@ function average(array) {
 // Мой код:
 //------------------------------------------------
 //вспомогательная функция:
-function isInSet(itemName, set){
-    if ( set[itemName] != undefined ) return true;
+function isInSet(property, object){
+    if ( property in object ) return true;
     else return false;
 }
 
