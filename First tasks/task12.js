@@ -55,10 +55,10 @@ ancestry.forEach(function(person) {
 // Мой код:
 //1. уберем людей, чьих матерей нет в списке;
 //2. посчитаем разницу в возрастах
-let arrayWithDiffs = ancestry.filter(function(person){
-  if (byName[person["mother"]] != undefined) return true;
+let arrayWithDiffs = ancestry.filter( function(person){
+  if ( person["mother"] in byName ) return true;
   else return false;
-}).map(function(person){ 
+}).map( function(person){ 
   return person["born"] - byName[person["mother"]]["born"];
 });
 
