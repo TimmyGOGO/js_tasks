@@ -4,6 +4,7 @@ http://www.itmathrepetitor.ru/zadachi-po-javascript-iz-knigi-vyrazitelnyjj-javas
 =========================================================================
 
 Листинг задач:
+
 1. Треугольник
 2. FizzBuzz
 3. Шахматная доска
@@ -19,12 +20,14 @@ http://www.itmathrepetitor.ru/zadachi-po-javascript-iz-knigi-vyrazitelnyjj-javas
 13. Историческая ожидаемая продолжительность жизни
 14. Every и some
 
+
 В папке "Second tasks" находятся решения задач 15-31 из данного ресурса:
 http://www.itmathrepetitor.ru/zadachi-po-javascript-iz-knigi-vyrazitelnyjj-javascript/
 
 =========================================================================
 
 Листинг задач:
+
 15. Векторный тип
 16. Ещё одна ячейка
 17. Интерфейс к последовательностям
