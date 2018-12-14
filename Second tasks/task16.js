@@ -46,8 +46,10 @@ StretchCell.prototype.minHeight = function() {
 };
 
 StretchCell.prototype.draw = function(width, height) {
-    return this.inner.draw(this.width, this.height - 1)
-      .concat([repeat(" ", this.width)]);
+    var w = ( width > this.width ) ? width : this.width;
+    var h = ( height > this.height ) ? height : this.height;
+    return this.inner.draw(w, h - 1)
+      .concat([repeat(" ", w)]);
 };
 
 //checking:
